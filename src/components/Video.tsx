@@ -41,11 +41,14 @@ type Props = {
 }
 
 export const Video = ({ lessonSlug }: Props) => {
-  const { data } = useQuery<GetLessonBySlugResponse>(GET_LESSON_BY_SLUG_QUERY, {
-    variables: { slug: lessonSlug },
-  })
+  const { data, loading } = useQuery<GetLessonBySlugResponse>(
+    GET_LESSON_BY_SLUG_QUERY,
+    {
+      variables: { slug: lessonSlug },
+    }
+  )
 
-  if (!data) {
+  if (!data || loading) {
     return (
       <div className='flex-1 grid place-items-center'>
         <p>Carregando...</p>
